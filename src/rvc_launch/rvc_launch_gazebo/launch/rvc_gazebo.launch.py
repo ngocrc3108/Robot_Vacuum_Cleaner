@@ -1,6 +1,6 @@
 from launch import LaunchDescription
 from launch.actions import IncludeLaunchDescription
-from launch.substitutions import PathJoinSubstitution
+from launch.substitutions import PathJoinSubstitution, TextSubstitution
 from launch_ros.substitutions import FindPackageShare
 
 def generate_launch_description():
@@ -17,8 +17,19 @@ def generate_launch_description():
         }.items(),
     )
 
+    gazebo_node = IncludeLaunchDescription(
+        PathJoinSubstitution([FindPackageShare('gazebo_ros'), 'launch', 'gazebo.launch.py']),
+        launch_arguments={
+            'extra_gazebo_args': [
+                TextSubstitution(text='--ros-args --params-file '),
+                PathJoinSubstitution([rvc_launch_common_share_dir, 'config', 'gazebo_params.yaml']),
+            ],
+        }.items()
+    )
+
     ld = LaunchDescription()
 
     ld.add_action(common_launch)
+    ld.add_action(gazebo_node)
 
     return ld
