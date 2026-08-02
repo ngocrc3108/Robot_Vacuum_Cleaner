@@ -1,0 +1,24 @@
+from launch import LaunchDescription
+from launch.actions import IncludeLaunchDescription
+from launch.substitutions import PathJoinSubstitution
+from launch_ros.substitutions import FindPackageShare
+
+def generate_launch_description():
+
+    rvc_launch_common_share_dir = FindPackageShare('rvc_launch_common')
+
+    robot_description_file = PathJoinSubstitution([FindPackageShare('rvc_robot_description_gazebo'), 'urdf', 'robot.urdf.xacro'])
+
+    common_launch = IncludeLaunchDescription(
+        PathJoinSubstitution([rvc_launch_common_share_dir, 'launch', 'rvc_common.launch.py']),
+        launch_arguments={
+            'use_sim_time' : 'true',
+            'robot_description_file' : robot_description_file,
+        }.items(),
+    )
+
+    ld = LaunchDescription()
+
+    ld.add_action(common_launch)
+
+    return ld

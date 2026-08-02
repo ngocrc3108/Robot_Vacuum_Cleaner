@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<robot name="wheel" xmlns:xacro="http://wiki.ros.org/xacro">
+  <xacro:macro
+    name="wheel"
+    params="prefix *origin parent:=base_link"
+  >
+    <joint name="${prefix}_base_mount_joint" type="continuous">
+      <xacro:insert_block name="origin"/>
+      <parent link="${parent}"/>
+      <child link="${prefix}_base_link"/>
+      <axis xyz="0 1 0"/>
+    </joint>
+
+    <link name="${prefix}_base_link"/>
+  </xacro:macro>
+</robot>

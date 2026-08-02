@@ -1,0 +1,28 @@
+<?xml version="1.0"?>
+<robot name="rvc_common" xmlns:xacro="http://wiki.ros.org/xacro">
+
+  <xacro:property name="chassis_radius" value="0.15"/>
+  <xacro:property name="chassis_height" value="0.067"/>
+
+  <xacro:include filename="$(find rvc_robot_description_common)/urdf/components/wheel.urdf.xacro"/>
+  <xacro:include filename="$(find rvc_robot_description_common)/urdf/components/caster_wheel.urdf.xacro"/>
+
+  <link name="base_link"/>
+
+  <xacro:wheel
+    prefix="left_wheel"
+  >
+    <origin xyz="0 ${chassis_radius} 0" rpy="0 0 0"/>
+  </xacro:wheel>
+
+  <xacro:wheel
+    prefix="right_wheel"
+  >
+    <origin xyz="0 -${chassis_radius} 0" rpy="0 0 0"/>
+  </xacro:wheel>
+
+  <xacro:caster_wheel>
+    <origin xyz="${chassis_radius} 0 0" rpy="0 0 0"/>
+  </xacro:caster_wheel>
+
+</robot>
