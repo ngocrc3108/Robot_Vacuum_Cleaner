@@ -1,14 +1,27 @@
 <?xml version="1.0"?>
 <robot name="caster_wheel" xmlns:xacro="http://wiki.ros.org/xacro">
 
-  <material name="white">
-    <color rgba="1 1 1 1"/>
-  </material>
+  <xacro:include filename="$(find rvc_robot_description_common)/urdf/utils/inertial_macros.xacro"/>
 
   <xacro:macro
     name="caster_wheel"
-    params="prefix:=caster_wheel *origin parent:=base_link"
+    params="
+      prefix:=caster_wheel
+      *origin
+      parent:=base_link
+      config_file:='$(find rvc_robot_description_common)/config/caster_wheel_params.yaml'
+    "
   >
+    <xacro:property name="caster_wheel_params" value="${xacro.load_yaml(config_file)}"/>
+
+    <!-- caster wheel geometric propreties -->
+    <xacro:property name="caster_wheel_geometric" value="${caster_wheel_params['geometric']}"/>
+    <xacro:property name="caster_wheel_radius" value="${caster_wheel_geometric['radius']}"/>
+
+    <!-- caster wheel physical propreties -->
+    <xacro:property name="caster_wheel_physical" value="${caster_wheel_params['physical']}"/>
+    <xacro:property name="caster_wheel_mass" value="${caster_wheel_physical['mass']}"/>
+
     <joint name="${prefix}_base_mount_joint" type="fixed">
       <xacro:insert_block name="origin"/>
       <parent link="${parent}"/>
@@ -18,10 +31,20 @@
     <link name="${prefix}_base_link">
       <visual>
         <geometry>
-          <sphere radius="0.006"/>
+          <sphere radius="${caster_wheel_mass}"/>
         </geometry>
         <material name="white"/>
       </visual>
+      <collision>
+        <origin xyz="0 0 0" rpy="0 0 0"/>
+        <geometry>
+          <!-- use sphere to simplify friction -->
+          <sphere radius="${caster_wheel_radius}"/>
+        </geometry>            
+      </collision>
+      <xacro:inertial_sphere mass="${caster_wheel_mass}" radius="${caster_wheel_radius}">
+        <origin xyz="0 0 0" rpy="0 0 0"/>
+      </xacro:inertial_sphere>
     </link>
 
   </xacro:macro>

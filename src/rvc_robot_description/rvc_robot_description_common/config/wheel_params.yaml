@@ -1,0 +1,6 @@
+geometric:
+  radius: 0.034
+  width: 0.025
+
+physical:
+  mass: 0.01

@@ -1,0 +1,5 @@
+geometric:
+  radius: 0.006
+
+physical:
+  mass: 0.001

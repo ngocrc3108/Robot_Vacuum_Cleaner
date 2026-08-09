@@ -1,0 +1,52 @@
+<?xml version="1.0"?>
+<robot name="chassis" xmlns:xacro="http://wiki.ros.org/xacro">
+
+  <xacro:include filename="$(find rvc_robot_description_common)/urdf/utils/inertial_macros.xacro"/>
+
+  <xacro:macro
+    name="chassis"
+    params="
+      prefix
+      *origin
+      parent:=base_link
+      config_file:='$(find rvc_robot_description_common)/config/chassis_params.yaml'
+    "
+  >
+    <xacro:property name="chassis_params" value="${xacro.load_yaml(config_file)}"/>
+
+    <!-- chassis geometric propreties -->
+    <xacro:property name="chassis_geometric" value="${chassis_params['geometric']}"/>
+    <xacro:property name="chassis_radius" value="${chassis_geometric['radius']}"/>
+    <xacro:property name="chassis_height" value="${chassis_geometric['height']}"/>
+
+    <!-- chassis physical propreties -->
+    <xacro:property name="chassis_physical" value="${chassis_params['physical']}"/>
+    <xacro:property name="chassis_mass" value="${chassis_physical['mass']}"/>
+
+    <joint name="${prefix}_base_mount_joint" type="fixed">
+      <xacro:insert_block name="origin"/>
+      <parent link="${parent}"/>
+      <child link="${prefix}_base_link"/>
+    </joint>
+
+    <link name="${prefix}_base_link">
+      <visual>
+        <origin xyz="0 0 0" rpy="0 0 0"/>
+        <material name="white"/>
+        <geometry>
+          <cylinder radius="${chassis_radius}" length="${chassis_height}"/>
+        </geometry>
+      </visual>
+      <collision>
+        <origin xyz="0 0 0" rpy="0 0 0"/>
+        <geometry>
+          <cylinder radius="${chassis_radius}" length="${chassis_height}"/>
+        </geometry>
+      </collision>
+      <xacro:inertial_cylinder mass="${chassis_mass}" length="${chassis_height}" radius="${chassis_radius}">
+        <origin xyz="${chassis_radius/2} 0 0" rpy="0 0 0"/>
+      </xacro:inertial_cylinder>
+    </link>
+  </xacro:macro>
+
+</robot>
