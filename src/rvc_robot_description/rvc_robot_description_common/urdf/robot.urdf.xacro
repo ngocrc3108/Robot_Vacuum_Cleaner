@@ -1,8 +1,13 @@
 <?xml version="1.0"?>
 <robot name="rvc_common" xmlns:xacro="http://wiki.ros.org/xacro">
 
-  <xacro:property name="chassis_radius" value="0.15"/>
-  <xacro:property name="chassis_height" value="0.067"/>
+  <xacro:arg name="chassis_config_file" default="$(find rvc_robot_description_common)/config/chassis_params.yaml"/>
+  <xacro:property name="chassis_params" value="${xacro.load_yaml('$(arg chassis_config_file)')}"/>
+
+  <!-- chassis geometric propreties -->
+  <xacro:property name="chassis_geometric" value="${chassis_params['geometric']}"/>
+  <xacro:property name="chassis_radius" value="${chassis_geometric['radius']}"/>
+  <xacro:property name="chassis_height" value="${chassis_geometric['height']}"/>
 
   <xacro:include filename="$(find rvc_robot_description_common)/urdf/utils/materials.urdf.xacro"/>
 
