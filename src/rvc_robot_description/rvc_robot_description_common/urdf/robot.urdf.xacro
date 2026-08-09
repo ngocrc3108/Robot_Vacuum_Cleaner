@@ -6,10 +6,17 @@
 
   <xacro:include filename="$(find rvc_robot_description_common)/urdf/utils/materials.urdf.xacro"/>
 
+  <xacro:include filename="$(find rvc_robot_description_common)/urdf/components/chassis.urdf.xacro"/>
   <xacro:include filename="$(find rvc_robot_description_common)/urdf/components/wheel.urdf.xacro"/>
   <xacro:include filename="$(find rvc_robot_description_common)/urdf/components/caster_wheel.urdf.xacro"/>
 
   <link name="base_link"/>
+
+  <xacro:chassis
+    prefix="chassis"
+  >
+    <origin xyz="0 0 ${chassis_height/2}" rpy="0 0 0"/>
+  </xacro:chassis>
 
   <xacro:wheel
     prefix="left_wheel"
