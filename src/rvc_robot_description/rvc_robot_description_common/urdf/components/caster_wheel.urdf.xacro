@@ -35,7 +35,7 @@
     <link name="${prefix}_base_link">
       <visual>
         <geometry>
-          <sphere radius="0.006"/>
+          <sphere radius="${caster_wheel_mass}"/>
         </geometry>
         <material name="white"/>
       </visual>
