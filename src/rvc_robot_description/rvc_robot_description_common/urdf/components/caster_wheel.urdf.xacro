@@ -3,10 +3,6 @@
 
   <xacro:include filename="$(find rvc_robot_description_common)/urdf/utils/inertial_macros.xacro"/>
 
-  <material name="white">
-    <color rgba="1 1 1 1"/>
-  </material>
-
   <xacro:macro
     name="caster_wheel"
     params="

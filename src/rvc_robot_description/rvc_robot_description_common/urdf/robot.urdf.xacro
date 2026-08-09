@@ -4,6 +4,8 @@
   <xacro:property name="chassis_radius" value="0.15"/>
   <xacro:property name="chassis_height" value="0.067"/>
 
+  <xacro:include filename="$(find rvc_robot_description_common)/urdf/utils/materials.urdf.xacro"/>
+
   <xacro:include filename="$(find rvc_robot_description_common)/urdf/components/wheel.urdf.xacro"/>
   <xacro:include filename="$(find rvc_robot_description_common)/urdf/components/caster_wheel.urdf.xacro"/>
 
