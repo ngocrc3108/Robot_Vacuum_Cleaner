@@ -3,7 +3,7 @@
   <xacro:macro
     name="wheel"
     params="
-      prefix
+      name
       *origin
       parent:=base_link
       config_file:='$(find rvc_robot_description_common)/config/wheel_params.yaml'
@@ -22,14 +22,14 @@
     <xacro:property name="wheel_physical" value="${wheel_params['physical']}"/>
     <xacro:property name="wheel_mass" value="${wheel_physical['mass']}"/>
 
-    <joint name="${prefix}_base_mount_joint" type="continuous">
+    <joint name="${name}_base_mount_joint" type="continuous">
       <xacro:insert_block name="origin"/>
       <parent link="${parent}"/>
-      <child link="${prefix}_base_link"/>
+      <child link="${name}_base_link"/>
       <axis xyz="0 1 0"/>
     </joint>
 
-    <link name="${prefix}_base_link">
+    <link name="${name}_base_link">
       <visual>
         <origin xyz="0 0 0" rpy="${pi/2} 0 0"/>
         <geometry>

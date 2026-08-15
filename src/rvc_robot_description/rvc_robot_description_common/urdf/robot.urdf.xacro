@@ -23,19 +23,19 @@
   </link>
 
   <xacro:chassis
-    prefix="chassis"
+    name="chassis"
   >
     <origin xyz="0 0 ${chassis_height/2}" rpy="0 0 0"/>
   </xacro:chassis>
 
   <xacro:wheel
-    prefix="left_wheel"
+    name="left_wheel"
   >
     <origin xyz="0 ${chassis_radius} 0" rpy="0 0 0"/>
   </xacro:wheel>
 
   <xacro:wheel
-    prefix="right_wheel"
+    name="right_wheel"
   >
     <origin xyz="0 -${chassis_radius} 0" rpy="0 0 0"/>
   </xacro:wheel>
