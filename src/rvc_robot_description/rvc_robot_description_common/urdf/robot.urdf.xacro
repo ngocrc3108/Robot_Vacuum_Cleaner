@@ -40,7 +40,9 @@
     <origin xyz="0 -${chassis_radius} 0" rpy="0 0 0"/>
   </xacro:wheel>
 
-  <xacro:caster_wheel>
+  <xacro:caster_wheel
+    name="caster_wheel"
+  >
     <origin xyz="${chassis_radius} 0 0" rpy="0 0 0"/>
   </xacro:caster_wheel>
 
