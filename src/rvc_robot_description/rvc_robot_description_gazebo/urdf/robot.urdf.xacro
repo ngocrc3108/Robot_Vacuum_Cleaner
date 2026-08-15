@@ -2,5 +2,6 @@
 <robot name="rvc_gazebo" xmlns:xacro="http://wiki.ros.org/xacro">
 
   <xacro:include filename="$(find rvc_robot_description_common)/urdf/robot.urdf.xacro"/>
+  <xacro:include filename="$(find rvc_robot_description_gazebo)/urdf/materials.urdf.xacro"/>
 
 </robot>
