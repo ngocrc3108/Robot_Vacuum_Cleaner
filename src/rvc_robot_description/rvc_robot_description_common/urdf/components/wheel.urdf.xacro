@@ -22,14 +22,26 @@
     <xacro:property name="wheel_physical" value="${wheel_params['physical']}"/>
     <xacro:property name="wheel_mass" value="${wheel_physical['mass']}"/>
 
-    <joint name="${name}_base_mount_joint" type="continuous">
+    <joint name="${name}_base_mount_joint" type="fixed">
       <xacro:insert_block name="origin"/>
       <parent link="${parent}"/>
       <child link="${name}_base_link"/>
-      <axis xyz="0 1 0"/>
     </joint>
 
     <link name="${name}_base_link">
+      <xacro:inertial_cylinder mass="0.001" radius="0.001" length="0.01">
+        <origin xyz="0 0 0" rpy="0 0 0"/>
+      </xacro:inertial_cylinder>
+    </link>
+
+    <joint name="${name}_base_rotate_joint" type="continuous">
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <parent link="${name}_base_link"/>
+      <child link="${name}"/>
+      <axis xyz="0 1 0"/>
+    </joint>
+
+    <link name="${name}">
       <visual>
         <origin xyz="0 0 0" rpy="${pi/2} 0 0"/>
         <geometry>
