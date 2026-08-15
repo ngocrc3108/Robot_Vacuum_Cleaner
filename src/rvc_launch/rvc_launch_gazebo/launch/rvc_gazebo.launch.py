@@ -1,6 +1,7 @@
 from launch import LaunchDescription
 from launch.actions import IncludeLaunchDescription
 from launch.substitutions import PathJoinSubstitution, TextSubstitution
+from launch_ros.actions import Node
 from launch_ros.substitutions import FindPackageShare
 
 def generate_launch_description():
@@ -28,9 +29,20 @@ def generate_launch_description():
         }.items()
     )
 
+    robot_spawner_node = Node(
+        package='gazebo_ros', executable='spawn_entity.py',
+        arguments=[
+            '-topic', '/robot_description',
+            '-entity', 'Robot_Vacuum_Cleaner',
+            '-x', '0.0',
+            '-y', '0.0',
+        ],
+        output='screen')
+
     ld = LaunchDescription()
 
     ld.add_action(common_launch)
     ld.add_action(gazebo_node)
+    ld.add_action(robot_spawner_node)
 
     return ld
