@@ -7,7 +7,7 @@ from launch_ros.substitutions import FindPackageShare
 def generate_launch_description():
 
     rvc_launch_common_share_dir = FindPackageShare('rvc_launch_common')
-    rvc_launch_gazebo_share_dir = FindPackageShare('rvc_launch_common')
+    rvc_launch_gazebo_share_dir = FindPackageShare('rvc_launch_gazebo')
 
     robot_description_file = PathJoinSubstitution([FindPackageShare('rvc_robot_description_gazebo'), 'urdf', 'robot.urdf.xacro'])
 
