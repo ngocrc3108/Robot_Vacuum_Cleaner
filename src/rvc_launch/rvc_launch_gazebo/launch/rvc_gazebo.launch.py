@@ -6,6 +6,7 @@ from launch_ros.substitutions import FindPackageShare
 def generate_launch_description():
 
     rvc_launch_common_share_dir = FindPackageShare('rvc_launch_common')
+    rvc_launch_gazebo_share_dir = FindPackageShare('rvc_launch_common')
 
     robot_description_file = PathJoinSubstitution([FindPackageShare('rvc_robot_description_gazebo'), 'urdf', 'robot.urdf.xacro'])
 
@@ -22,7 +23,7 @@ def generate_launch_description():
         launch_arguments={
             'extra_gazebo_args': [
                 TextSubstitution(text='--ros-args --params-file '),
-                PathJoinSubstitution([rvc_launch_common_share_dir, 'config', 'gazebo_params.yaml']),
+                PathJoinSubstitution([rvc_launch_gazebo_share_dir, 'config', 'gazebo_params.yaml']),
             ],
         }.items()
     )
