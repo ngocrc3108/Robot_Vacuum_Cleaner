@@ -28,7 +28,15 @@
       <child link="${name}_base_link"/>
     </joint>
 
-    <link name="${name}_base_link">
+    <link name="${name}_base_link"/>
+
+    <joint name="${name}_base_fixed_joint" type="fixed">
+      <origin xyz="0 0 -0.028" rpy="0 0 0"/>
+      <parent link="${name}_base_link"/>
+      <child link="${name}"/>
+    </joint>
+
+    <link name="${name}">
       <visual>
         <geometry>
           <sphere radius="${caster_wheel_mass}"/>
